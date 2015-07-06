@@ -403,6 +403,17 @@ case "$DEVICE" in
 	flash_heimdall $PROJECT
 	;;
 
+"revolution")
+		run_adb root &&
+		run_adb shell stop b2g &&
+		run_adb remount &&
+		flash_gecko &&
+		flash_gaia &&
+		update_time &&
+		echo Restarting B2G &&
+		run_adb shell start b2g
+	  ;;
+
 *)
 	if [[ $(type -t flash_${DEVICE}) = function ]]; then
 		flash_${DEVICE} $PROJECT
